@@ -14,10 +14,11 @@ interface ILinkButtonProps {
   index: number;
   link: To;
   icons?: ReactNode;
-  collapsed: boolean;
+  collapsed?: boolean;
   sizeArray: number;
   childrens?: any[];
   textinWhite?: boolean;
+  iAmChild?: boolean;
 }
 
 export function Button({ text, onClick, icons, type, className }: ButtonProps) {
@@ -74,17 +75,25 @@ export function LinkButton({
   icons,
   childrens,
   textinWhite,
+  iAmChild,
 }: ILinkButtonProps) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [hover, setHover] = useState(false);
   return (
-    <div className=" w-full">
+    <div className=" w-full ">
       <button
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         onClick={() => {
-          childrens ? setShow(!show) : navigate(link);
+          childrens && !collapsed
+            ? setShow(!show)
+            : childrens && collapsed
+            ? null
+            : navigate(link);
         }}
         key={index}
-        className={` ${collapsed ? "p-5" : " py-3 px-5"}  ${
+        className={` ${collapsed && !iAmChild ? "p-5" : " py-3 px-5"}  ${
           index > -0 && index - (1 % 2) === 0
             ? " border-b border-t border-white/80"
             : index == sizeArray - 1
@@ -92,29 +101,66 @@ export function LinkButton({
             : ""
         } ${
           textinWhite
-            ? "text-green-500 hover:bg-green-200 rounded-none "
+            ? "text-green-500 hover:bg-green-200 rounded-none pl-7 "
             : "text-white hover:(text-green-500 bg-green-50)"
-        }   text-left  duration-300 font-semibold     flex justify-between items-center w-full`}
+        } 
+        text-left  duration-300 font-semibold flex justify-between  z-10 items-center w-full`}
       >
         <div className="flex space-x-2 items-center">
           {icons}
-          <span>{label} </span>
+          <span className={`${collapsed && !iAmChild ? "hidden" : ""} `}>
+            {label}{" "}
+          </span>
+
+          {collapsed && !iAmChild ? (
+            <div
+              className={`${
+                hover
+                  ? "absolute left-16   bg-green-50 text-green-500  overflow-hidden  rounded"
+                  : "hidden"
+              }`}
+            >
+              {!childrens ? (
+                <div className={`py-3 px-8 `}>
+                  <span>{label} </span>
+                </div>
+              ) : (
+                <div>
+                  {childrens.map((child) => (
+                    <LinkButton
+                      label={child.label}
+                      index={child.index}
+                      link={child.link}
+                      icons={child.icons}
+                      textinWhite
+                      iAmChild
+                      collapsed={collapsed}
+                      sizeArray={childrens.length}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         {childrens && show ? (
-          <AiFillCaretUp />
+          <AiFillCaretUp className={`${collapsed ? "hidden" : ""}`} />
         ) : childrens && !show ? (
-          <AiFillCaretDown />
+          <AiFillCaretDown className={`${collapsed ? "hidden" : ""}`} />
         ) : null}
       </button>
       {childrens && show ? (
-        <div className=" flex flex-col  bg-white/80 ">
+        <div className=" flex flex-col  bg-white/80  ">
           {childrens &&
             childrens.map((child) => (
               <LinkButton
                 label={child.label}
                 index={child.index}
                 link={child.link}
+                icons={child.icons}
                 textinWhite
                 collapsed={collapsed}
                 sizeArray={childrens.length}

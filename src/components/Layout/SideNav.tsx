@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Ilink, links } from "../../config/nav-config";
 import { Button, LinkButton } from "../Shared/Button";
 import Logo from "../Shared/Logo";
 
 function SideNav() {
-  const navigate = useNavigate();
-  const collapsed = false;
+  const collapsed = useSelector((state: any) => state.collapsedState.collapsed);
   return (
-    <div className="h-screen bg-green-500 w-[15%] mr-5 fixed flex flex-col space-y-10  py-10">
+    <div className={`h-screen bg-green-500 ${collapsed ? ' items-center':' lg:w-[15%]  '} duration-500  mr-5 fixed flex flex-col space-y-10 py-10 hidden lg:block`}>
       <div className="px-5">
         {" "}
-        <Logo isWhite />
+        <Logo isWhite collapsed={collapsed} />
       </div>
 
       <div className="  flex flex-col  mx-4  rounded-lg overflow-hidden bg-green-100/50 ">
