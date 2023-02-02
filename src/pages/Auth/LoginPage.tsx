@@ -2,13 +2,17 @@ import { MouseEvent, useState } from "react";
 import AuthLayout from "../../layout/AuthLayout";
 import { BiHide, BiShow } from "react-icons/bi";
 import { Button } from "../../components/Shared/Button";
+import { AiOutlineLogin } from "react-icons/ai";
+import Logo from "../../components/Shared/Logo";
+import { useNavigate } from "react-router";
 function LoginPage() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   return (
     <AuthLayout>
       <div className=" w-11/12 md:w-9/12 lg:w-1/4  flex flex-col  space-y-5 bg-green-50/90 rounded-xl shadow shadow-green-100 px-5 py-10 ">
-        <div className="bg-green-500 w-16 h-16 transform rotate-45 rounded-xl flex self-center flex justify-center items-center ">
-          <div className="h-3 w-3 bg-white rounded-full"></div>
+        <div className="flex justify-center">
+          <Logo noText/>
         </div>
         <div className="text-center space-y-5 text-green-500">
           <h1 className="text-4xl">Welcome !!!</h1>
@@ -43,7 +47,12 @@ function LoginPage() {
             </button>
           </div>
 
-          <Button text={"Login"}  onClick={() => console.log("clicked")} />
+          <Button
+
+            text={"Login"}
+            className="justify-center"
+            onClick={()=>navigate("/accueil")}
+          />
         </div>
       </div>
     </AuthLayout>

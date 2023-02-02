@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { AiFillTool, AiOutlineUser } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useNavigate } from "react-router";
 import { Button, LinkButton } from "./Button";
 
 function NavProfile() {
+  const navigate = useNavigate();
   const user = {
     name: "Nahida",
     role: "Admnistrateur",
@@ -31,7 +33,10 @@ function NavProfile() {
       </div>
 
       {show ? (
-        <div style={{zIndex:'100000'}} className="absolute  flex flex-col  rounded-lg w-full w-[15em] bg-green-500/50 pt-5 pb-3">
+        <div
+          style={{ zIndex: "100000" }}
+          className="absolute  flex flex-col  rounded-lg w-full w-[15em] bg-green-500/50 pt-5 pb-3"
+        >
           <div>
             <div className="flex items-center space-x-2 px-5 pb-3 border-b border-white   ">
               <div className="bg-light-300 rounded-full overflow-hidden w-15 h-15">
@@ -72,7 +77,7 @@ function NavProfile() {
             >
               <Button
                 className=" justify-center w-full mt-3"
-                onClick={undefined}
+                onClick={()=>navigate('/')}
                 icons={<BiLogOutCircle size={20} />}
                 type="cancel"
                 text="Logout"

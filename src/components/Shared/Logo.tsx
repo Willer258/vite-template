@@ -1,9 +1,10 @@
 interface ILogoProps {
   isWhite?: boolean;
   collapsed?: boolean;
+  noText?: boolean;
 }
 
-function Logo({ isWhite }: ILogoProps) {
+function Logo({ isWhite, noText }: ILogoProps) {
   return (
     <div className="flex items-center space-x-3">
       <div
@@ -14,9 +15,11 @@ function Logo({ isWhite }: ILogoProps) {
         <div className="h-3 w-3 bg-white rounded-full"></div>
       </div>
 
-      <span className={`text-2xl font-bold ${isWhite && "text-white"} `}>
-        Logo
-      </span>
+      {!noText && (
+        <span className={`text-2xl font-bold ${isWhite && "text-white"} `}>
+          Logo
+        </span>
+      )}
     </div>
   );
 }
