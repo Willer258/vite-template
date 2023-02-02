@@ -1,7 +1,7 @@
 
 function HomePage() {
   return (
-    <div>HomePage</div>
+    <div className="h-screen">HomePage</div>
   )
 }
 

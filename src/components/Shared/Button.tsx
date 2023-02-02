@@ -54,7 +54,7 @@ export function IconButton({ onClick, icons, type, className }: ButtonProps) {
           : type === "outlined"
           ? "outline-green-300 hover:bg-green-300 text-green-50"
           : type == "text"
-          ? "text-green-300 bg-green-50"
+          ? "text-green-300 "
           : type == "cancel"
           ? "bg-red-500/70 text-white"
           : "bg-green-400 hover:bg-green-500 text-green-50"

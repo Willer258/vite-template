@@ -8,7 +8,7 @@ import NavProfile from "../Shared/NavProfile";
 function HeaderNav() {
   const collapsed = true;
   return (
-    <div className="bg-green-100/50 flex justify-between mx-5 pl-3 pr-10 py-2 mt-3 rounded-xl cursor-pointer fixed top-2 right-0 right-0 w-10/12">
+    <div className="bg-green-100/70 backdrop-filter backdrop-blur-sm flex justify-between mx-5 pl-3 pr-10 py-2 mt-3 rounded-xl  fixed top-2 right-0 w-10/12">
       <IconButton
         type="text"
         icons={

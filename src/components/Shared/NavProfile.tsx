@@ -17,7 +17,7 @@ function NavProfile() {
     <div className="relative">
       <div
         onClick={() => setShow(!show)}
-        className="flex items-center space-x-2 hover:bg-green-500/30 px-3 py-1 duration-300 rounded "
+        className="flex items-center space-x-2 cursor-pointer hover:bg-green-500/30 px-3 py-1 duration-300 rounded "
       >
         <div className="bg-light-300 rounded-full overflow-hidden w-15 h-15">
           <img
@@ -35,7 +35,7 @@ function NavProfile() {
       {show ? (
         <div
           style={{ zIndex: "100000" }}
-          className="absolute  flex flex-col  rounded-lg w-full w-[15em] bg-green-500/50 pt-5 pb-3"
+          className="absolute  flex flex-col  rounded-lg w-full w-[15em]  backdrop-filter backdrop-blur-sm bg-green-400/70 pt-5 pb-3"
         >
           <div>
             <div className="flex items-center space-x-2 px-5 pb-3 border-b border-white   ">
